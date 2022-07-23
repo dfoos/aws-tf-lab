@@ -8,7 +8,7 @@ resource "aws_instance" "ec2_public" {
   vpc_security_group_ids      = [var.security_group]
   user_data                   = var.user_data
   tags = {
-    "name" = "lab-bastion-public"
+    "name"     = "lab-bastion-public"
     "hostname" = var.tag_name
   }
 }

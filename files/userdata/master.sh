@@ -15,34 +15,29 @@ mkdir -p /srv/lab
 chmod -R 770 /srv/lab
 chcon -t samba_share_t /srv/lab
 chown -R root:private_group /srv/lab
-pass="bAO9A3fZS312"
+pass=${samba_password}
 printf "$pass\n$pass\n" | smbpasswd -a -s lab
 
 mv /etc/samba/smb.conf /etc/samba/smb.conf.bk
 
 cat >> /etc/samba/smb.conf << EOF
 [global]
-workgroup = WORKGROUP
-server string = Samba Server %v
-netbios name = rocky-8
-security = user
-map to guest = bad user
-dns proxy = no
-ntlm auth = true
+        workgroup = SAMBA
+        security = user
 
-[public]
-path =  /srv/public
-browsable =yes
-writable = yes
-guest ok = yes
-read only = no
+        passdb backend = tdbsam
+
+        printing = cups
+        printcap name = cups
+        load printers = yes
+        cups options = raw
 
 [lab]
-path = /srv/lab
-valid users = @private
-guest ok = no
-writable = yes
-browsable = yes
+        path = /srv/lab
+        valid users = lab
+        guest ok = no
+        writable = yes
+        browsable = yes
 EOF
 
 systemctl start smb

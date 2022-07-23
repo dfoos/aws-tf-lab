@@ -15,7 +15,7 @@ resource "aws_key_pair" "key_pair" {
     command = "echo '${tls_private_key.private_key.private_key_pem}' > ./lab-key.pem"
   }
 
-    provisioner "local-exec" {
+  provisioner "local-exec" {
     command = "chmod 400 ./lab-key.pem"
   }
 }

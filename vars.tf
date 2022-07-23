@@ -16,6 +16,6 @@ variable "local-key-pair" {
 }
 
 variable "ami" {
-  type = string
+  type    = string
   default = "ami-043ceee68871e0bb5"
 }

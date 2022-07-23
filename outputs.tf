@@ -8,7 +8,7 @@ output "public_node1_connection_string" {
   value       = "ssh -i ${var.local-key-pair} rocky@${module.instance_public_node_one.public_ip}"
 }
 
-output "public_node1_SMB_connection_string" {
-  description = "SMB Connection"
-  value       = "smbclient '\\\\master\\Public'"
+output "samba_password" {
+  description = "Randomly generated pasword used for SAMBA shares"
+  value       = random_string.smb_password.result
 }

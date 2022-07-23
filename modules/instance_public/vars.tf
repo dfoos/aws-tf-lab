@@ -3,25 +3,25 @@ variable "ami" {
 }
 
 variable "subnet" {
-  type    = string
+  type = string
 }
 
 variable "key_name" {
-  type    = string
+  type = string
 }
 
 variable "security_group" {
-  type    = string
+  type = string
 }
 
 variable "associate_public_ip" {
-  type    = bool
+  type = bool
 }
 
 variable "tag_name" {
-  type    = string
+  type = string
 }
 
 variable "user_data" {
-  type    = string
+  type = string
 }

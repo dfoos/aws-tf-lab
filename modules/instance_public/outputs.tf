@@ -7,5 +7,5 @@ output "private_ip" {
 }
 
 output "tag_name" {
-  value = "${lookup(aws_instance.ec2_public.tags, "hostname")}"
+  value = lookup(aws_instance.ec2_public.tags, "hostname")
 }

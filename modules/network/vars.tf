@@ -9,7 +9,7 @@ variable "state_bucket" {
 }
 
 variable "ami" {
-  type  = string
+  type    = string
   default = ""
 }
 
