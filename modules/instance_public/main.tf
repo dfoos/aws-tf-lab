@@ -11,7 +11,7 @@ resource "aws_instance" "ec2_public" {
     delete_on_termination = true
   }
   tags = {
-    "name"     = "lab-bastion-public"
+    "name"     = "${var.lab_name}-public"
     "hostname" = var.tag_name
   }
 }

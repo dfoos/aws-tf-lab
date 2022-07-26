@@ -8,6 +8,7 @@ terraform {
 
 module "network" {
   source = "./modules/network"
+  lab_name            = var.lab-name
 }
 
 data "template_file" "user_data_master" {
@@ -37,6 +38,7 @@ module "instance_public_master" {
   ami                 = var.ami
   associate_public_ip = true
   tag_name            = "master"
+  lab_name            = var.lab-name
   user_data           = data.template_file.user_data_master.rendered
 
 }
@@ -48,6 +50,7 @@ module "instance_public_node_one" {
   ami                 = var.ami
   associate_public_ip = true
   tag_name            = "node1"
+  lab_name            = var.lab-name
   user_data           = data.template_file.user_data_node_one.rendered
 }
 
