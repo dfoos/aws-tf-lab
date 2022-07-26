@@ -1,3 +1,7 @@
+variable "lab_name" {
+  type        = string
+}
+
 variable "ami" {
   type = string
 }

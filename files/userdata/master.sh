@@ -1,5 +1,4 @@
 #!/bin/sh
-# Samba install script for CentOS 7 
 sudo su -
 yum -y install samba samba-common samba-client
 

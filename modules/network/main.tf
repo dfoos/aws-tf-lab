@@ -1,14 +1,14 @@
 resource "aws_vpc" "lab-vpc" {
   cidr_block = var.vpc_cidr
   tags = {
-    Name = "lab-vpc"
+    Name = "${var.lab_name}-vpc"
   }
 }
 
 resource "aws_internet_gateway" "inet-gateway" {
   vpc_id = aws_vpc.lab-vpc.id
   tags = {
-    Name = "lab-inet-gateway"
+    Name = "${var.lab_name}-inet-gateway"
   }
 }
 
@@ -16,7 +16,7 @@ resource "aws_subnet" "sn-public-one" {
   vpc_id     = aws_vpc.lab-vpc.id
   cidr_block = var.public_subnet_one
   tags = {
-    Name = "lab-subnet-public-one"
+    Name = "${var.lab_name}-subnet-public-one"
   }
 }
 
@@ -24,7 +24,7 @@ resource "aws_subnet" "sn-private-one" {
   vpc_id     = aws_vpc.lab-vpc.id
   cidr_block = var.private_subnet_one
   tags = {
-    Name = "lab-subnet-private-one"
+    Name = "${var.lab_name}-subnet-private-one"
   }
 }
 
@@ -35,7 +35,7 @@ resource "aws_route_table" "rt-public" {
     gateway_id = aws_internet_gateway.inet-gateway.id
   }
   tags = {
-    Name = "lab-route-public"
+    Name = "${var.lab_name}-route-public"
   }
 }
 
@@ -46,7 +46,7 @@ resource "aws_route_table" "rt-private" {
     nat_gateway_id = aws_nat_gateway.nat-gw.id
   }
   tags = {
-    Name = "lab-route-private"
+    Name = "${var.lab_name}-route-private"
   }
 }
 
@@ -64,7 +64,7 @@ resource "aws_route_table_association" "rt-association-private" {
 resource "aws_eip" "natIP" {
   vpc = true
   tags = {
-    Name = "lab-natIP"
+    Name = "${var.lab_name}-natIP"
   }
 }
 
@@ -72,13 +72,13 @@ resource "aws_nat_gateway" "nat-gw" {
   allocation_id = aws_eip.natIP.id
   subnet_id     = aws_subnet.sn-public-one.id
   tags = {
-    Name = "lab-nat-gateway"
+    Name = "${var.lab_name}-nat-gateway"
   }
 }
 
 // SG to allow SSH connections from anywhere
 resource "aws_security_group" "allow_ssh_pub" {
-  name        = "lab-allow-ssh-public"
+  name        = "${var.lab-name}-allow-ssh-public"
   description = "Allow SSH inbound traffic"
   vpc_id      = aws_vpc.lab-vpc.id
   ingress {
@@ -110,6 +110,6 @@ resource "aws_security_group" "allow_ssh_pub" {
   }
 
   tags = {
-    Name = "lab-allow_ssh_pub"
+    Name = "${var.lab_name}-allow_ssh_pub"
   }
 }
