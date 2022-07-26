@@ -7,6 +7,9 @@ resource "aws_instance" "ec2_public" {
   subnet_id                   = var.subnet
   vpc_security_group_ids      = [var.security_group]
   user_data                   = var.user_data
+  root_block_device {
+    delete_on_termination = true
+  }
   tags = {
     "name"     = "lab-bastion-public"
     "hostname" = var.tag_name
