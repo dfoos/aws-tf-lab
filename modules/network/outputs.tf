@@ -6,7 +6,7 @@ output "public_subnet_one" {
   value = aws_subnet.sn-public-one.id
 }
 
-output "security_group_public_master" {
+output "security_group_public_management" {
   value = aws_security_group.allow_instance_to_instance_pub
 }
 

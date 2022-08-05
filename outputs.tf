@@ -1,6 +1,6 @@
-output "public_master_connection_string" {
+output "public_management_connection_string" {
   description = "Public SSH Connection"
-  value       = "ssh -i ${var.local-key-pair} rocky@${module.instance_public_master.public_ip}"
+  value       = "ssh -i ${var.local-key-pair} rocky@${module.instance_public_management.public_ip}"
 }
 
 output "public_node1_connection_string" {
